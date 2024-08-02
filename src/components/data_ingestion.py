@@ -8,6 +8,7 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass # used to create class vairables
 from src.components.data_transformation import DataTransformation, DataTransformartionConfig
+from src.components.model_trainer import ModelTrainer, ModelTrainerConfig
 
 # Ths file is Mianly to read data from a source and then to create train, test datasets
 
@@ -53,14 +54,33 @@ class DataIngestion:
             raise CustomException(e, sys)
 
 if __name__ == "__main__":
+    
     # obj = DataIngestion()
     # obj.initiate_data_ingestion()
+
+
+
+
+
+    # obj = DataIngestion()
+    # train_data, test_data = obj.initiate_data_ingestion()
+
+    # data_transformation = DataTransformation()
+    # data_transformation.initiate_data_transformation(train_data, test_data)
+
+
+
 
     obj = DataIngestion()
     train_data, test_data = obj.initiate_data_ingestion()
 
     data_transformation = DataTransformation()
-    data_transformation.initiate_data_transformation(train_data, test_data)
-    
+    train_arr, test_arr, _ = data_transformation.initiate_data_transformation(train_data, test_data)
+
+    modeltrainer = ModelTrainer()
+    print(modeltrainer.initiate_model_training(train_arr, test_arr))
+
+
+
 
 
